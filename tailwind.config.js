@@ -1,0 +1,1 @@
+module.exports = { content: ['./index.html','./src/**/*.{ts,tsx}'], theme: { extend: { fontFamily: { display: ['Sora','sans-serif'], sans: ['Inter','sans-serif'] }, colors: { ink: '#14161a', accent: '#8f86ff' } } } };
