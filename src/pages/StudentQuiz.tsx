@@ -71,7 +71,7 @@ export default function StudentQuiz() {
   const onWarn = useCallback((m: string) => { setWarn(m); setTimeout(() => setWarn(''), 4000); }, []);
   useExamMonitor({ sessionId: sess?.id ?? '', quizId: id ?? '', studentId: sess?.student_id ?? '', enabled: running && !!quiz?.enable_monitoring, onWarn });
 
-   if (!quiz || !sess) return <p className="p-10 text-zinc-400">{msg || 'Loading…'}</p>;
+    if (!quiz || !sess) return <p className="p-10 text-zinc-400">{msg || 'Loading…'} {msg && <a className="underline" href="/student/login">Back to join page</a>}</p>;
   if (!running) {
     const state = quiz.status === 'live' ? null : quiz.status === 'paused' ? 'Quiz temporarily paused by faculty.' : quiz.status === 'ended' ? 'This quiz has ended.' : 'Waiting for faculty to start the quiz…';
     return (

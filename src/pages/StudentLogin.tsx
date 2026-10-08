@@ -24,7 +24,7 @@ export default function StudentLogin() {
       const { data: s, error: e2 } = await supabase.from('quiz_sessions').select('quiz_id').eq('id', data).single();
       if (e2 || !s) throw e2;
       nav(`/student/quiz/${s.quiz_id}`);
-    } catch (x: any) { setErr(friendly(x?.message ?? '')); setBusy(false); }
+      } catch (x: any) { setErr(friendly(x?.message ?? '') + ' [' + (x?.message ?? 'no message') + ']'); setBusy(false); }
   };
   return (
     <main className="grid min-h-screen place-items-center p-4">
