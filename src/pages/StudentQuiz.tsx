@@ -21,7 +21,7 @@ export default function StudentQuiz() {
   const load = useCallback(async () => {
     await ensureStudentAuth();
         const { data: auth } = await supabase.auth.getUser();
-    const { data: s } = await supabase.from('quiz_sessions').select('*').eq('quiz_id', id).eq('user_id', auth.user?.id ?? '').maybeSingle();
+            const { data: s } = await supabase.from('quiz_sessions').select('*').eq('quiz_id', id).eq('user_id', auth.user?.id ?? '').order('joined_at', { ascending: false }).limit(1).maybeSingle();
         if (!s) { setMsg('No quiz session found for this login. Account: ' + (auth.user?.id ?? 'none') + (auth.user?.is_anonymous ? ' (student)' : ' (NOT a student account)')); return; }
     if (s.status === 'submitted') { nav(`/student/result/${id}`); return; }
     const { data: q } = await supabase.from('quizzes').select('*').eq('id', id).single();

@@ -8,6 +8,7 @@ import StudentLogin from './pages/StudentLogin';
 import StudentQuiz from './pages/StudentQuiz';
 import StudentResult from './pages/StudentResult';
 import Monitor from './pages/Monitor';
+import Results from './pages/StudentResult';
 
 
 function RequireMgmt({ children }: { children: ReactElement }) {
@@ -33,6 +34,7 @@ export default function App() {
       <Route path="/student/result/:id" element={<StudentResult />} />
       <Route path="*" element={<p className="p-10">404 — page not found.</p>} />
       <Route path="/management/monitor/:id" element={<RequireMgmt><Monitor /></RequireMgmt>} />
+      <Route path="/management/results/:id" element={<RequireMgmt><Results /></RequireMgmt>} />
     </Routes>
   );
 }

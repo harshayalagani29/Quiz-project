@@ -18,7 +18,12 @@ export default function StudentLogin() {
   const submit = async (e: FormEvent) => {
     e.preventDefault(); setBusy(true); setErr('');
     try {
-      await ensureStudentAuth();
+           await ensureStudentAuth();
+      const { data: u } = await supabase.auth.getUser();
+      const { data: mine } = await supabase.from('quiz_sessions').select('student_id').eq('user_id', u.user?.id ?? '');
+      if (mine && mine.length > 0 && !mine.some(m => m.student_id === usn.trim().toUpperCase())) {
+        await supabase.auth.signOut(); await supabase.auth.signInAnonymously(); // a different student on this browser gets a fresh account
+      }
       const { data, error } = await supabase.rpc('join_quiz', { p_code: code.trim(), p_name: name.trim(), p_student_id: usn.trim().toUpperCase(), p_device: deviceInfo() });
       if (error) throw error;
       const { data: s, error: e2 } = await supabase.from('quiz_sessions').select('quiz_id').eq('id', data).single();

@@ -54,6 +54,7 @@ export default function Dashboard() {
                 <button className="btn-ghost" disabled={q.status === 'ended' || q.status === 'draft'} onClick={() => setStatus(q.id, 'ended')}><Square size={14} />End</button>
                 <Link to={`/management/monitor/${q.id}`} className="btn-ghost">Monitor live</Link>
                 <button className="btn-ghost text-red-400" onClick={() => remove(q.id, q.title)}><Trash2 size={14} />Delete</button>
+                <Link to={`/management/results/${q.id}`} className="btn-ghost">Results</Link>
               </div>
             </article>
           ))}
